@@ -83,14 +83,11 @@ public class Picnic {
 		numOfStudents = 0;
 		numOfPairs = 0;
 		solution = 0;
-		for(int i=0; i<10; i++){
-			havePartner[i] = false;
-		}
-		for(int i=0; i<10; i++){
-			for(int j=0; j<10; j++){
-				areFriends[i][j] = false;
-			}
-		}
+		
+		havePartner = new boolean[10];
+		
+		areFriends = new boolean[10][10];
+		
 	}
 
 }
