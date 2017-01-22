@@ -79,13 +79,13 @@ public class BoardCover {
 
 	}
 
-	public static boolean isPossible(int x, int y, int type) {
+	public static boolean isPossible(int row, int col, int type) {
 
 		for (int i = 0; i < 3; i++) {
-			int ax = x + coverType[type][i][0];
-			int ay = y + coverType[type][i][1];
+			int newRow = row + coverType[type][i][0];
+			int newCol = col + coverType[type][i][1];
 
-			if (ax < 0 || ay < 0 || ax >= height || ay >= width || board[ax][ay] != 0) {
+			if (newRow < 0 || newCol < 0 || newRow >= height || newCol >= width || board[newRow][newCol] != 0) {
 				return false;
 			}
 		}
@@ -93,24 +93,24 @@ public class BoardCover {
 		return true;
 	}
 
-	public static void placeBlock(int x, int y, int type) {
+	public static void placeBlock(int row, int col, int type) {
 
 		for (int i = 0; i < 3; i++) {
-			int ax = x + coverType[type][i][0];
-			int ay = y + coverType[type][i][1];
+			int newRow = row + coverType[type][i][0];
+			int newCol = col + coverType[type][i][1];
 
-			board[ax][ay] = 1;
+			board[newRow][newCol] = 1;
 		}
 
 	}
 
-	public static void removeBlock(int x, int y, int type) {
+	public static void removeBlock(int row, int col, int type) {
 
 		for (int i = 0; i < 3; i++) {
-			int ax = x + coverType[type][i][0];
-			int ay = y + coverType[type][i][1];
+			int newRow = row + coverType[type][i][0];
+			int newCol = col + coverType[type][i][1];
 
-			board[ax][ay] = 0;
+			board[newRow][newCol] = 0;
 		}
 
 	}
