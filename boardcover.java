@@ -46,7 +46,6 @@ public class BoardCover {
 			solution = 0;
 		}
 		
-		sc.nextLine();
 		sc.close();
 
 	}
