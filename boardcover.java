@@ -52,28 +52,28 @@ public class BoardCover {
 
 	public static void cover() {
 
-		int x = -1;
-		int y = -1;
+		int row = -1;
+		int col = -1;
 
 		Loop: for (int i = 0; i < height; i++) {
 			for (int j = 0; j < width; j++) {
 				if (board[i][j] == 0) {
-					x = i;
-					y = j;
+					row = i;
+					col = j;
 					break Loop;
 				}
 			}
 		}
 
-		if (x == -1) {
+		if (row == -1) {
 			solution++;
 		}
 
 		for (int type = 0; type < 4; type++) {
-			if (isPossible(x, y, type)) {
-				placeBlock(x, y, type);
+			if (isPossible(row, col, type)) {
+				placeBlock(row, col, type);
 				cover();
-				removeBlock(x, y, type);
+				removeBlock(row, col, type);
 			}
 		}
 
