@@ -1,5 +1,4 @@
-package jungol;
-
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
@@ -24,9 +23,7 @@ public class Cheese {
 		queue = new LinkedList<Point>();
 		
 		for(int i=0; i<row; i++) for(int j=0; j<col; j++) cheeseBoard[i][j] = sc.nextInt();
-		
-		System.out.println(cheeseCount());
-		
+				
 		findAnswer();
 
 		sc.close();
@@ -34,19 +31,19 @@ public class Cheese {
 	}
 	
 	private static void searchOuterCheese(int x, int y){
-		
-		System.out.println("ho");
-		
-		if(!isRange(x, y)) return;
-		
-		if(visited[x][y]) return;
-			
+				
 		visited[x][y] = true;
 		
-		if(cheeseBoard[x][y]==1) queue.add(new Point(x, y));
-		else for(int i=0; i<4; i++) searchOuterCheese(x+dx[i], y+dy[i]);
+		if(cheeseBoard[x][y]==1){
+			queue.add(new Point(x, y));
+			return;
+		}
+		
+		for(int i=0; i<4; i++){
+			if(isRange(x+dx[i], y+dy[i])&&!visited[x+dx[i]][y+dy[i]]) searchOuterCheese(x+dx[i], y+dy[i]);
+		}
 			
-		return;		
+		return;
 		
 	}
 		
@@ -60,30 +57,30 @@ public class Cheese {
 	
 	private static void findAnswer(){
 		
-		System.out.println(cheeseCount());
+		int lastCheese = 0;
 		while(cheeseCount()!=0){
+			
+			lastCheese = cheeseCount();
 			searchOuterCheese(0, 0);
-			int queueSize = queue.size();
-			for(int i=0; i<queueSize; i++){
+			while(queue.size()!=0){
 				Point point = queue.poll();
 				cheeseBoard[point.x][point.y] = 0;
 			}
 			hours++;
+			
+			for(boolean[] v : visited) Arrays.fill(v, false);
+			
 		}
 		
 		System.out.println(hours);
-		System.out.println(cheeseCount());
+		System.out.println(lastCheese);
 		
 	}
 	
 	private static int cheeseCount(){
 		
 		int count = 0;
-		for(int i=0; i<row; i++){
-			for(int j=0; j<col; j++){
-				if(cheeseBoard[i][j]==1) count++;
-			}
-		}
+		for(int i=0; i<row; i++) for(int j=0; j<col; j++) if(cheeseBoard[i][j]==1) count++;
 		return count;		
 		
 	}
